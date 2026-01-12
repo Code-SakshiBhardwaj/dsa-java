@@ -34,6 +34,10 @@ public class Main {
     System.out.println(UnionOfTwoSortedArraysOptimal(arr1,arr2));
 //    System.out.println(IntersectionOfTwoSortedArraysBF(new int[]{1,2,2,3,4}, new int[]{2,2,3,5}));
     System.out.println(IntersectionOfTwoSortedArraysOptimal(new int[]{1,2,2,3,4}, new int[]{2,2,3,5}));
+//    System.out.println(missingNumberBetter(new int[]{1,3,4}, 4));
+//    System.out.println(missingNumberOptimal(new int[]{1,3,4}, 4));
+//    System.out.println(maximumConsecutiveOnes(new int[]{1,1,0,0,1,1,1,1,0,1,1,0}));
+//
 
-  }
+    System.out.println(numberAppearOnceOptimal(new int[]{1,2,2,3,4,3,1}));  }
 }

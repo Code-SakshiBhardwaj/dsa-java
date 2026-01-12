@@ -262,4 +262,97 @@ public class Basic {
     }
     return intersection;
   }
+
+  public static int missingNumberBF(int []arr, int n){
+    for(int i = 1; i <= n; i++){
+      boolean isPresent = false;
+      for(int val : arr){
+        if(val == i){
+          isPresent = true;
+          break;
+        }
+      }
+      if(!isPresent){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static int missingNumberBetter(int []arr, int n){
+    int []hasArr = new int[n+1];
+    for(int i : arr){
+      hasArr[i] = 1;
+    }
+    for(int i = 1; i <= n+1; i++){
+      if(hasArr[i] == 0){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static int missingNumberOptimal(int []arr, int n){
+    int xor = 0;
+    for(int i = 0; i < arr.length; i++){
+      xor ^= (arr[i] ^ (i+1));
+    }
+    xor = xor ^ n;
+    return xor;
+  }
+
+  public static int maximumConsecutiveOnes(int []arr){
+    int maxCount = 0;
+    int count = 0;
+    for(int i : arr){
+      if(i == 1){
+        count++;
+        maxCount = Math.max(maxCount, count);
+      }
+      else{
+        count = 0;
+      }
+    }
+    return maxCount;
+  }
+
+  public static int numberAppearOnceBF(int []arr){
+    for(int i : arr){
+      int count = 0;
+      for(int j : arr){
+        if(j == i){
+          count++;
+        }
+
+      }
+      if(count == 1){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static int numberAppearOnceBetter(int []arr){
+    HashMap<Integer, Integer> map = new HashMap<>();
+    for(int i : arr){
+      map.put(i,map.getOrDefault(i,0)+1);
+    }
+
+    System.out.println(map);
+
+    for(int i: map.keySet()){
+      if(map.get(i) == 1){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public static int numberAppearOnceOptimal(int []arr){
+    int xor = 0;
+    for(int i : arr){
+      xor ^= i;
+    }
+    return xor;
+  }
 }
