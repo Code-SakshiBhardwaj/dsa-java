@@ -355,4 +355,70 @@ public class Basic {
     }
     return xor;
   }
+
+  public static void printSubarray(int []arr){
+    for(int i = 0; i < arr.length; i++){
+      for(int j = i; j < arr.length; j++){
+        for(int k = i; k < j+1 ; k++){
+          System.out.print(arr[k]+ " ");
+        }
+        System.out.println();
+      }
+    }
+  }
+
+  public static int longestSubarraySumKBF(int []arr,int k){
+    int maxi = 0;
+    for(int i = 0; i < arr.length; i++){
+      int sum = 0;
+      for(int j = i; j < arr.length; j++){
+        sum += arr[j];
+        if(sum == k){
+          maxi = Math.max(maxi, j-i+1);
+        }
+      }
+    }
+    return maxi;
+  }
+
+  public static int longestSubarraySumKBetter(int []arr,int k){
+    int maxLen = 0;
+    HashMap<Integer, Integer> preSumMap = new HashMap<>();
+    int sum = 0;
+    for(int i = 0; i < arr.length; i++){
+      sum += arr[i];
+      if(sum == k){
+        maxLen = Math.max(maxLen, i+1);
+      }
+      int remaining =  sum - k;
+      if(preSumMap.containsKey(remaining)){
+        maxLen = Math.max(maxLen, i - preSumMap.get(remaining));
+      }
+      if(!preSumMap.containsKey(sum)){
+        preSumMap.put(sum, i);
+      }
+    }
+    return maxLen;
+  }
+
+  public static int longestSubarraySumKOptimal(int []arr,int k){
+    int left = 0;
+    int right = 0;
+    int sum = 0;
+    int len = 0;
+    while(right < arr.length){
+      if(sum <= k){
+        if(sum == k){
+          len = Math.max(len, right-left);
+        }
+        sum += arr[right];
+        right++;
+      }
+      else{
+        sum -= arr[left];
+        left++;
+      }
+    }
+    return len;
+  }
 }
